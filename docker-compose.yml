@@ -4,5 +4,12 @@ services:
   webapi:
     image: ${DOCKER_REGISTRY-}webapi
     build:
-      context: .
-      dockerfile: WebApi\Dockerfile
+      context: WebApi
+      dockerfile: Dockerfile
+  client-node:
+    image: ${DOCKER_REGISTRY-}client-node
+    build:
+      context: Client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000

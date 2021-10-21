@@ -1,0 +1,6 @@
+version: '3.4'
+
+services:
+  node-client:
+    image: ${DOCKER_REGISTRY-}node-client
+    build: .
