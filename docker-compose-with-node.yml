@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  client-node:
+    image: client-node
+    build:
+      context: Client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      SERVER_HOST: 'webapi-node:3001'
+  webapi-node:
+    image: webapi-node
+    build:
+      context: ClientWebAPI
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    networks:
+      default:
+        aliases:
+          - webapi-node

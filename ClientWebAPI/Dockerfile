@@ -5,12 +5,13 @@
 
 FROM mywrm/windows-node:16 AS base
 WORKDIR /app
-EXPOSE 3000
+
 COPY package.json ./
 RUN yarn
 COPY . .
 ENTRYPOINT cmd.exe
 CMD yarn start
+EXPOSE 3001
 
 # FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 # WORKDIR /app

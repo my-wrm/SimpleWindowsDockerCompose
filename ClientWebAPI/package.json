@@ -1,0 +1,14 @@
+{
+  "name": "Client",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Thada",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "express": "^4.17.1"
+  }
+}
