@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  webapi:
+    image: webapi
+    build:
+      context: WebApi
+      dockerfile: Dockerfile
+      target: base
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+      # - C:\Users\mildronize\.nuget\packages\:c:\.nuget\packages:ro
+    # command: dotnet WebApi.dll
+    # command: FOR /L %N IN () DO @echo Oops
+    # entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646 /LogDebuggeeOutputToStdOut
+    # labels:
+    #   com.microsoft.visualstudio.debuggee.program: "\"C:\\Program Files\\dotnet\\dotnet.exe\""
+    #   com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath c:\\.nuget\\packages  \"C:\\app\\bin\\Release\\net5.0\\WebApi.dll\""
+    #   com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+    #   com.microsoft.visualstudio.debuggee.killprogram: "C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe"
+
+  # webapi:
+  #   image: ${DOCKER_REGISTRY-}webapi
+  #   build:
+  #     context: WebApi
+  #     dockerfile: Dockerfile
+  # client-node:
+  #   image: ${DOCKER_REGISTRY-}client-node
+  #   build:
+  #     context: Client
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     SERVER_HOST: webapi:80

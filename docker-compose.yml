@@ -4,8 +4,12 @@ services:
   webapi:
     image: ${DOCKER_REGISTRY-}webapi
     build:
-      context: WebApi
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: WebApi/Dockerfile
+    networks:
+      default:
+        aliases:
+          - webapi
   client-node:
     image: ${DOCKER_REGISTRY-}client-node
     build:
@@ -14,4 +18,6 @@ services:
     ports:
       - 3000:3000
     environment:
-      SERVER_HOST: webapi:80
+      SERVER_HOST: 'webapi:443'
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:C:\app\Https:ro
